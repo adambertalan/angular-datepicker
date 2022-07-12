@@ -30,6 +30,7 @@ interface IConfig {
   showGoToCurrent?: boolean;
   unSelectOnClick?: boolean;
   numOfMonthRows?: number;
+  timezone?: string;
 }
 
 export interface IDayCalendarConfig extends IConfig,

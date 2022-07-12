@@ -63,17 +63,22 @@ export class DayCalendarService {
     let current = dayjsRef(firstDayOfBoard.toDate());
     const prevMonth = parsedMonth.subtract(1, 'month');
     const nextMonth = parsedMonth.add(1, 'month');
-    const today = dayjsRef();
+    let today = dayjsRef();
+    if (config.timezone) {
+      today = dayjsRef().tz(config.timezone);
+    }
 
     const daysOfCalendar: IDay[] = this.utilsService.createArray(42)
       .reduce((array: IDay[]) => {
         array.push({
           date: dayjsRef(current.toDate()),
-          selected: !!selected.find(selectedDay => current.isSame(selectedDay, 'day')),
+          // selected: !!selected.find(selectedDay => current.isSame(selectedDay, 'day')),
+          selected: !!selected.find(selectedDay => current.date() === selectedDay.date()),
           currentMonth: current.isSame(parsedMonth, 'month'),
           prevMonth: current.isSame(prevMonth, 'month'),
           nextMonth: current.isSame(nextMonth, 'month'),
-          currentDay: current.isSame(today, 'day'),
+          // currentDay: current.isSame(today, 'day'),
+          currentDay: current.date() === today.date(),
           disabled: this.isDateDisabled(current, config)
         });
         current = current.add(1, 'day');

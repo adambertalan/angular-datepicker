@@ -16,6 +16,7 @@ interface IConfig {
   showTwentyFourHours?: boolean;
   timeSeparator?: string;
   returnedValueType?: ECalendarValue;
+  timezone?: string;
 }
 
 export interface ITimeSelectConfig extends IConfig, ICalendar {
